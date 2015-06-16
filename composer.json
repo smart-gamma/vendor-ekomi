@@ -1,0 +1,19 @@
+{
+    "name": "gamma/ekomi",
+    "description": "Ekomi reviews provider via api",
+    "type": "bundle",
+    "version": "master",
+    "require": {
+        "php": ">=5.3"
+    },
+    "authors": [
+        {
+            "name": "Evgeniy Kuzmin",
+            "email": "jekccs@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "Gamma\\Ekomi": "" }
+    },
+    "target-dir": "Gamma/Ekomi"
+}
