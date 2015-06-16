@@ -1,6 +1,6 @@
 <?php
 
-namespace Gamma\TrustedShop\TrustedShopBundle\Services;
+namespace Gamma\Ekomi\EkomiBundle\Services;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

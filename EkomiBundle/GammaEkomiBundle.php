@@ -1,9 +1,9 @@
 <?php
 
-namespace Gamma\TrustedShop\TrustedShopBundle;
+namespace Gamma\Ekomi\EkomiBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class GammaTrustedShopBundle extends Bundle
+class GammaEkomiBundle extends Bundle
 {
 }
