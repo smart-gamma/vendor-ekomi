@@ -1,0 +1,18 @@
+services:
+    gamma.ekomi.cache:
+        class: Doctrine\Common\Cache\%gamma.tekomi.config.cache%Cache
+        arguments: [%kernel.cache_dir%] 
+    gamma.ekomi.api:
+        class: Gamma\Ekomi\EkomiBundle\Services\Api
+        arguments: [@service_container, @gamma.trusted_shop.cache]
+    gamma.ekomi.manager:
+        class: Gamma\Ekomi\EkomiBundle\Services\EkomiManager
+        arguments: [@service_container, null, @gamma.trusted_shop.api]
+    gamma.ekomi.kernel.request.listener:
+        class: Gamma\Ekomi\EkomiBundle\Listener\KernelEvents
+        arguments: [@service_container]
+        tags:
+            -
+                name: kernel.event_listener
+                event: kernel.request
+                method: onKernelRequest      
