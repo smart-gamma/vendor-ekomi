@@ -128,7 +128,6 @@ class Api extends LoggerService
                 $reviews[$i]['comment'] = trim($element['meinung']);
                 $reviews[$i]['date'] = date(DATE_ATOM);
                 $reviews[$i]['reply'] = '';
-                $reviews[$i]['source'] = self::REVIEW_PROVIDER;
                 $reviews[$i]['product_article'] = (int)$element['produkt_id'];
                 $reviews[$i]['provider'] = self::REVIEW_PROVIDER;
                 $i++;
