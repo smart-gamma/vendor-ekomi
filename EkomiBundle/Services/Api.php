@@ -94,7 +94,7 @@ class Api extends LoggerService
     public function reviewAggregation()
     {
         $data = array();
-        $apiUrl = $this->scheme.'://'.$this->host.'/'.$this->path;
+        $apiUrl = $this->getApiUrl();
         $string = $this->call($apiUrl);
         /*
         if ($xml = simplexml_load_string($string)) {
@@ -117,21 +117,29 @@ class Api extends LoggerService
     public function reviews()
     {
         $reviews = array();
-        $apiUrl = $this->scheme.'://'.$this->host.'/'.$this->path;
-        $lines = $this->call($apiUrl);
-        print_r($lines);die;
-        if (sizeof($lines) > 0) {               
+        $apiUrl = $this->getApiUrl();
+        $serialized = $this->call($apiUrl);
+        $elements = unserialize($serialized);
+
+        if (sizeof($elements ) > 0) {               
             $i = 0;
-            foreach($lines as $option) {
-                $reviews[$i]['rating'] = (int)$option->rating[0];
-                $reviews[$i]['comment'] = trim((string)$option->comment);
-                $reviews[$i]['date'] = (string)$option->date;
+            foreach($elements  as $element) {
+                $reviews[$i]['rating'] = (int)$element['bewertung'];
+                $reviews[$i]['comment'] = trim($element['meinung']);
+                $reviews[$i]['date'] = date(DATE_ATOM);
+                $reviews[$i]['reply'] = '';
+                $reviews[$i]['product_article'] = (int)$element['produkt_id'];
                 $reviews[$i]['provider'] = self::REVIEW_PROVIDER;
                 $i++;
             }
         }
 
         return $reviews;
+    }
+    
+    private function getApiUrl()
+    {
+        return $this->scheme.'://'.$this->host.'/'.$this->path .'?interface_id=' . $this->interface_id . '&interface_pw='. $this->interface_pw . '&type=' . $this->type;
     }
     
     /**
@@ -146,7 +154,7 @@ class Api extends LoggerService
         if ($this->cache->contains($id)) {
             $output = $this->cache->fetch($id);  
         } else {    
-            $output = file($apiUrl);           
+            $output = file_get_contents($apiUrl); 
             $this->cache->save($id, $output, $this->cacheTimeOut);
         } 
         
