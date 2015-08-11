@@ -87,26 +87,13 @@ class Api extends LoggerService
     }
 
     /**
-     * Load aggregated reviews data
+     * Load aggregated reviews data (Unsupported by Ekomi)
      *
      * @return array
      */
     public function reviewAggregation()
     {
-        $data = array();
-        $apiUrl = $this->getApiUrl();
-        $string = $this->call($apiUrl);
-        /*
-        if ($xml = simplexml_load_string($string)) {
-            $xPath = "/shop/ratings/result[@name='average']";
-            $data['averageRank'] = (float) $xml -> xpath($xPath)[0];
-            $data['maxRank'] = $this->maxRank;
-            $data['votes'] = $xml->ratings["amount"];
-            $data['shopName'] = $xml->name;
-            $data['ReviewProvider'] = self::REVIEW_PROVIDER;
-        }
-        */
-        return $data;
+        return array();
     }
 
     /**

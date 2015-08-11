@@ -15,11 +15,11 @@ class KernelEvents extends Service
 			/* @var  $globals \Twig_Environment */
 			$globals = $this->container->get('twig');
             $vars = $globals->getGlobals();
-            if(!isset($vars['_reviewAggregation'])) {
+            if(!isset($vars['_reviewAggregationEkomi'])) {
                 /* @var $trustedShopManager \Gamma\Ekomi\EkomiBundle\Services\EkomiManager */
                 $trustedShopManager = $this->container->get('gamma.ekomi.manager');
                 $reviewAggregation = $trustedShopManager->getReviewAggregation();
-                $globals->addGlobal('_reviewAggregation', $reviewAggregation);
+                $globals->addGlobal('_reviewAggregationEkomi', $reviewAggregation);
             }    
 		}
 	}
